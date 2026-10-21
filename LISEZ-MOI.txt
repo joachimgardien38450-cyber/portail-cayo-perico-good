@@ -1,0 +1,14 @@
+PORTAIL CAYO PERICO — SERVICES PUBLICS DYNAMIQUES
+
+Cette version affiche les services en fiches personnalisées, sans grille Airtable.
+Les fiches sont chargées depuis la table Airtable « Services publics » via une fonction Netlify côté serveur.
+
+IMPORTANT : cette version ne fonctionnera pas en production tant qu’elle n’est pas déployée avec les fonctions Netlify et la variable d’environnement AIRTABLE_TOKEN. Ne placez jamais le jeton dans index.html.
+
+Configuration à faire dans Netlify après connexion du dépôt Git :
+1. Déployer le dossier du projet depuis un dépôt Git (le simple glisser-déposer ne déploie pas les fonctions Netlify).
+2. Dans Site configuration > Environment variables, ajouter AIRTABLE_TOKEN avec un jeton Airtable ayant uniquement l’accès lecture nécessaire à la base appLNpXCvj4QCvPPv.
+3. Redéployer le site.
+
+La fonction lit la table nommée exactement « Services publics ». Si la table a un nom différent, modifier la variable tableName dans netlify/functions/services.js.
+Les champs sont lus depuis Airtable et les variantes courantes de noms sont reconnues : Description, Horaires, Adresses/Adresse, Tél du services/Téléphone, Email du service/E-mail, Lien utile, Catégorie, Statut.
