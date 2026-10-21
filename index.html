@@ -132,7 +132,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 20px;background:#0b0c0a}.
   <article class="info-card"><img src="assets/card-2.jpg" alt="Ancienne architecture tropicale"><div class="info-body"><div class="symbol">▤</div><h3>La construction du pays</h3><p>Retracez les étapes importantes de l’organisation du territoire et de la création des institutions.</p></div></article>
   <article class="info-card"><img src="assets/card-3.jpg" alt="Port de l’île"><div class="info-body"><div class="symbol">✦</div><h3>Cayo Perico aujourd’hui</h3><p>Présentez la société actuelle, les projets collectifs et les ambitions pour les années à venir.</p></div></article>
  </div>
- <p class="notice" style="margin-top:18px">Textes de démonstration à personnaliser : ils ne constituent pas une chronologie historique vérifiée.</p>
+ <p class="notice" style="margin-top:18px"></p>
 </div></section>
 <section class="cream-section" id="services" style="padding-top:0"><div class="wrap">
  <div class="section-head"><div><div class="kicker">À votre service</div><h2>Services publics</h2></div><p>Accédez aux principales administrations et retrouvez les informations pratiques lorsqu’elles sont disponibles.</p></div>
@@ -160,7 +160,13 @@ document.getElementById('year').textContent=new Date().getFullYear();
 const servicesGrid=document.getElementById('servicesGrid');
 const servicesStatus=document.getElementById('servicesStatus');
 const categoryOrder=['Administration générale','Service de sécurité','Service de Justice','Service de santé',"Service de l'économie"];
-const categoryIcons={'Administration générale':'▦','Service de sécurité':'⬟','Service de Justice':'⚖','Service de santé':'✚',"Service de l'économie":'↗'};
+const categoryIcons={
+  'Administration générale':'🏛️',
+  'Service de sécurité':'🛡️',
+  'Service de Justice':'⚖️',
+  'Service de santé':'🏥',
+  "Service de l'économie":'💰'
+};
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function firstField(fields,names){for(const n of names){if(fields[n]!==undefined&&fields[n]!==null&&String(fields[n]).trim()!=='')return fields[n];}return '';}
 function makeServiceCard(record){
