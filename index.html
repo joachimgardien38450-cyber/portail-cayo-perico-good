@@ -161,12 +161,22 @@ const servicesGrid=document.getElementById('servicesGrid');
 const servicesStatus=document.getElementById('servicesStatus');
 const categoryOrder=['Administration générale','Service de sécurité','Service de Justice','Service de santé',"Service de l'économie"];
 const categoryIcons={
-  'Administration générale':'🏛️',
-  'Service de sécurité':'🛡️',
-  'Service de justice':'⚖️',
-  'Service de santé':'🏥',
-  'Service de l’économie':'💰'
+  'administration generale':'🏛️',
+  'service de securite':'🛡️',
+  'service de justice':'⚖️',
+  'service de sante':'🏥',
+  'service de l economie':'💰'
 };
+
+function normalizeCategory(value){
+  return String(value??'')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/[’']/g,' ')
+    .replace(/\s+/g,' ')
+    .trim()
+    .toLowerCase();
+}
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function firstField(fields,names){for(const n of names){if(fields[n]!==undefined&&fields[n]!==null&&String(fields[n]).trim()!=='')return fields[n];}return '';}
 function makeServiceCard(record){
@@ -180,7 +190,7 @@ function makeServiceCard(record){
  const email=firstField(f,['Email du service','E-mail du service','E-mail','Email','Courriel']);
  const lien=firstField(f,['Lien utile','Lien','URL']);
  const statut=firstField(f,['Statut','status']);
- const icon=categoryIcons[category]||'🏛️';
+ const icon=categoryIcons[normalizeCategory(category)]||'🏢';
  const row=(label,value,kind='text')=>{if(value===undefined||value===null||String(value).trim()==='')return '';let val=escapeHtml(value);if(kind==='tel'){let raw=String(value).replace(/[^+\d]/g,'');val=`<a href="tel:${escapeHtml(raw)}">${val}</a>`;}if(kind==='email'){val=`<a href="mailto:${escapeHtml(String(value).trim())}">${val}</a>`;}if(kind==='url'){let raw=String(value).trim();if(/^https?:\/\//i.test(raw))val=`<a href="${escapeHtml(raw)}" target="_blank" rel="noopener noreferrer">Consulter le lien →</a>`;else val=`<span>${val}</span>`;}return `<div><strong>${label}</strong><span>${val}</span></div>`;};
  return `<article class="service-card"><div class="service-icon" aria-hidden="true">${icon}</div><span class="service-category">${escapeHtml(category||'Service public')}</span>${statut?`<span class="service-status">${escapeHtml(statut)}</span>`:''}<h3>${escapeHtml(title)}</h3>${description?`<p>${escapeHtml(description)}</p>`:''}<div class="service-meta">${row('Horaires',horaires)}${row('Adresse',adresse)}${row('Téléphone',tel,'tel')}${row('E-mail',email,'email')}${row('Lien utile',lien,'url')}</div></article>`;
 }
