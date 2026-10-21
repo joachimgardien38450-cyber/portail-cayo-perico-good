@@ -163,9 +163,9 @@ const categoryOrder=['Administration générale','Service de sécurité','Servic
 const categoryIcons={
   'Administration générale':'🏛️',
   'Service de sécurité':'🛡️',
-  'Service de Justice':'⚖️',
+  'Service de justice':'⚖️',
   'Service de santé':'🏥',
-  "Service de l'économie":'💰'
+  'Service de l’économie':'💰'
 };
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function firstField(fields,names){for(const n of names){if(fields[n]!==undefined&&fields[n]!==null&&String(fields[n]).trim()!=='')return fields[n];}return '';}
