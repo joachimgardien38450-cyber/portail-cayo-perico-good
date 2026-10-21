@@ -180,7 +180,7 @@ function makeServiceCard(record){
  const email=firstField(f,['Email du service','E-mail du service','E-mail','Email','Courriel']);
  const lien=firstField(f,['Lien utile','Lien','URL']);
  const statut=firstField(f,['Statut','status']);
- const icon=categoryIcons[category]||'⌕';
+ const icon=categoryIcons[category]||'🏛️';
  const row=(label,value,kind='text')=>{if(value===undefined||value===null||String(value).trim()==='')return '';let val=escapeHtml(value);if(kind==='tel'){let raw=String(value).replace(/[^+\d]/g,'');val=`<a href="tel:${escapeHtml(raw)}">${val}</a>`;}if(kind==='email'){val=`<a href="mailto:${escapeHtml(String(value).trim())}">${val}</a>`;}if(kind==='url'){let raw=String(value).trim();if(/^https?:\/\//i.test(raw))val=`<a href="${escapeHtml(raw)}" target="_blank" rel="noopener noreferrer">Consulter le lien →</a>`;else val=`<span>${val}</span>`;}return `<div><strong>${label}</strong><span>${val}</span></div>`;};
  return `<article class="service-card"><div class="service-icon" aria-hidden="true">${icon}</div><span class="service-category">${escapeHtml(category||'Service public')}</span>${statut?`<span class="service-status">${escapeHtml(statut)}</span>`:''}<h3>${escapeHtml(title)}</h3>${description?`<p>${escapeHtml(description)}</p>`:''}<div class="service-meta">${row('Horaires',horaires)}${row('Adresse',adresse)}${row('Téléphone',tel,'tel')}${row('E-mail',email,'email')}${row('Lien utile',lien,'url')}</div></article>`;
 }
