@@ -182,6 +182,8 @@ function firstField(fields,names){for(const n of names){if(fields[n]!==undefined
 function makeServiceCard(record){
  const f=record.fields||record;
  const category=String(firstField(f,['Catégorie','Categorie','category'])||'').trim();
+ console.log('Catégorie Airtable :', JSON.stringify(category));
+ console.log('Catégorie normalisée :', JSON.stringify(normalizeCategory(category)));
  const title=category||String(firstField(f,['Nom','Nom du service','Service','Name'])||'Service public');
  const description=firstField(f,['Description','description']);
  const horaires=firstField(f,['Horaires','horaire','Heures d’ouverture',"Heures d'ouverture"]);
